@@ -16,6 +16,7 @@ const books = [
     read: true,
   },
 ];
+
 class Book {
   constructor(id, title, author, read) {
     this.id = id;
@@ -30,6 +31,7 @@ class Library {
     this.nextId = books.length;
     this.books = books; //this will be the array passed in
   }
+
   addBook() {
     //grabbing the elements from the div
     const title = document.getElementById("title");
@@ -50,7 +52,7 @@ class Library {
     const tableBody = document.getElementById("tableBody"); //selecting body
     const newTr = document.createElement("tr"); //creating table row where trs will go
     newTr.classList.add(newBook.id); //assigning the same ID to use for removal
-    newTr.addEventListener("dbclick", () => {
+    newTr.addEventListener("dblclick", () => {
       this.removeBook(newBook.id);
     }); //event listener to remove book by double clicking
     const newTitle = document.createElement("td"); //creating tr
@@ -78,6 +80,7 @@ class Library {
     //now append this to table body.
     tableBody.appendChild(newTr);
   }
+
   markRead(checkbox, id) {
     //takes in checkbox
     //loop throught the books array
@@ -91,9 +94,14 @@ class Library {
     });
   }
   removeBook(bookId) {
+    console.log("event fired outside of filter");
     // to remove a book, use ID and loop through
     //reassining the books array after filtering out the book to remove
-    this.books.this.books.filter(({ id }) => bookId !== id);
+    // books.filter((id) => {
+    //   console.log("event fired");
+    //   console.log(id);
+    //   return bookId !== id;
+    // });
     //after this, you have to remove the book from the dom. you have to remove the table row containing that book
 
     const tbody = document.getElementById("tableBody"); //selecting table body which is parent of table row.
@@ -107,6 +115,7 @@ const form = document.getElementById("form");
 //creating event listener for the form
 
 form.addEventListener("submit", (event) => {
+  console.log("I created a book");
   event.preventDefault(); //preventing this from sending infomation, just grab the information.
   library.addBook();
 });
